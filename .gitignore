@@ -6,3 +6,5 @@ __pycache__/
 ml/data/
 .env
 .env
+ml/data/
+ml/output/modelo_rf.pkl
