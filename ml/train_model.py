@@ -1,12 +1,3 @@
-"""
-SOC Sentinel - Modelo de Detecção de Ameaças v2
-================================================
-Melhorias:
-- class_weight balanceado para dar mais peso a ataques
-- mais estimadores
-- threshold ajustado para priorizar recall
-"""
-
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
@@ -55,16 +46,12 @@ print("Treinando Random Forest v2...")
 modelo = RandomForestClassifier(
     n_estimators=200,
     max_depth=30,
-    class_weight={0: 1, 1: 2},  # peso dobrado para ataques
+    class_weight={0: 1, 1: 2},  
     random_state=42,
     n_jobs=-1
 )
 modelo.fit(X_train, y_train)
 
-# ── THRESHOLD AJUSTADO ────────────────────────────────────────────────────────
-# Em vez de usar 0.5 como padrão, usamos 0.3:
-# se o modelo acha que tem 30% de chance de ser ataque, já alerta.
-# Isso aumenta o recall (detecta mais ataques) às custas de mais falsos positivos.
 probabilidades = modelo.predict_proba(X_test)[:, 1]
 THRESHOLD = 0.3
 y_pred = (probabilidades >= THRESHOLD).astype(int)

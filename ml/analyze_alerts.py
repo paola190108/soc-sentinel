@@ -1,9 +1,3 @@
-"""
-SOC Sentinel - Análise de Alertas do Wazuh com ML
-==================================================
-Lê os alertas reais do Wazuh e classifica com o modelo treinado.
-"""
-
 import pickle
 import os
 import pandas as pd
@@ -72,4 +66,4 @@ for i, (tipo, prob, pred) in enumerate(zip(tipos, probs, preds)):
     print(f"{i+1:<4} {tipo:<20} {prob:.1%}{'':>8} {classe}")
 
 print(f"\nThreshold: {threshold} -- acima disso o modelo classifica como ataque")
-print("Modelo funcionando! Integracao com Wazuh pronta.")
+print("Modelo funcionando! Integração com Wazuh pronta.")
